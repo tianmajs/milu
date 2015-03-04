@@ -1,7 +1,7 @@
 {
 	"name": "milu",
-	"description": "The two-way function treer",
-	"version": "1.0.0",
+	"description": "The two-way function tree",
+	"version": "1.1.0",
 	"author": "Nanqiao Deng <nqdeng@gmail.com>",
 	"keywords": [
 		"utilities",
@@ -13,12 +13,5 @@
 		"url": "https://github.com/tianmajs/milu.git"
 	},
 	"license": "MIT",
-	"main": "./index.js",
-	"devDependencies": {
-		"mocha": "*",
-		"should": "*"
-	},
-	"scripts": {
-		"test": "mocha"
-	}
+	"main": "./index.js"
 }

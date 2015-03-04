@@ -10,44 +10,37 @@
 
 	var milu = require('milu');
 	
-	var root = milu(function (next, done) {
-		next(function (err) {
-			if (err) {
-				console.log('ERROR: %s', err.message);
-			}
-			done(err);
-		});
-	});
+	var verb = {
+		is: function (type) {
+			return function *(next) {
+				if (this.type === type) {
+					yield next;
+				}
+			};
+		},
+		say: function (word) {
+			return function *(next) {
+				console.log(word);
+			};
+		},
+	};
 	
-	root.pipe(function (next, done) {
-		if (this.left) {
-			next(done);
-		} else {
-			done();
-		}
-	}).pipe(function (next, done) {
-		console.log('left');
-		done();
-	});
+	var root = milu(verb);
 	
-	root.pipe(function (next, done) {
-		if (this.right) {
-			next(done);
-		} else {
-			done();
-		}
-	}).pipe(function (next, done) {
-		done(new Error('right'));
-	});
-	
-	root({ right: true }, function (err) {
+	root.is('cat').then
+			.say('miao')
+			.end
+		.is('dog').then
+			.say('wang')
+			.end;
+		
+	root.run({ type: 'cat' }, function (err) {
 		// ...
 	});
-	
 
 ## LICENSE
 
-Copyright (c) 2014 Alibaba.com, Inc.
+Copyright (c) 2014-2015 Alibaba.com, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
