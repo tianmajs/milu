@@ -16,5 +16,12 @@
 	"dependencies": {
 		"mini-co": "~1.0.0"
 	},
-	"main": "./index.js"
+	"main": "./index.js",
+	"scripts": {
+    "test": "mocha --harmony"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  }
 }
