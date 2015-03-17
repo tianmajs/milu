@@ -118,7 +118,18 @@ describe('milu unit test with es6 generator',function (){
       });
     });
 
+    it('异常测试',function (done){
+      var root = milu();
+      var error = new Error('err') ;
+      root.use(function *(next){
+        throw error;
+      });
 
+      root.run({},function (err){
+        expect(err).to.equal(error);
+        done();
+      });
+    });
 
 
 });
