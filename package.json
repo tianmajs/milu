@@ -21,7 +21,7 @@
 		"test": "mocha --harmony"
 	},
 	"devDependencies": {
-		"mocha": "*",
-		"chai": "*"
+		"mocha": "^2.2.1",
+		"chai": "^2.1.2"
 	}
 }
