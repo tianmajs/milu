@@ -1,3 +1,5 @@
+"use strict";
+
 var co = require('mini-co');
 
 module.exports = function (verb) {
@@ -19,21 +21,21 @@ module.exports = function (verb) {
 		fn = fn || function (next, done) {
 			next(done);
 		};
-		
+
 		if (fn.constructor.name === 'GeneratorFunction') {
 			fn = co(fn);
 		}
-		
+
 		node.use = function (fn) {
 			return (sibling = wrap(fn, parent));
 		};
-		
+
 		node.run = function (context, callback) {
 			var deep = false,
-			
+
 				next = function (callback) {
 					var node = child || sibling;
-					
+
 					deep = true;
 
 					if (node) {
@@ -42,7 +44,7 @@ module.exports = function (verb) {
 						callback.call(context, null);
 					}
 				},
-				
+
 				done = function (err) {
 					if (!err && !deep && child && sibling) {
 						sibling.run(context, callback);
@@ -50,7 +52,7 @@ module.exports = function (verb) {
 						callback.call(context, err);
 					}
 				};
-			
+
 			fn.call(context, next, done);
 		};
 
@@ -66,9 +68,9 @@ module.exports = function (verb) {
 				}
 			}
 		});
-		
+
 		return node;
 	}
-	
+
 	return wrap();
 };
