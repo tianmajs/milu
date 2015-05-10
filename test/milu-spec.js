@@ -131,10 +131,10 @@ describe('milu unit test', function() {
             };
             var root = milu(verb);
             root.is('cat').then
-                .say('miao')
+                    .say('miao')
                 .end
                 .is('dog').then
-                .say('wang')
+                    .say('wang')
                 .end;
 
             root.run({
@@ -176,16 +176,16 @@ describe('milu unit test', function() {
             };
             var root = milu(verb);
             root.is('cat').then
-                .say('miao')
+                    .say('miao')
                 .end
                 .is('dog').then
-                .say('wang')
-                .can('swim').then
-                .action('go to swimming')
-                .end
-                .can('bike')
-                .action('ride bike')
-                .end
+                    .say('wang')
+                    .can('swim').then
+                        .action('go to swimming')
+                    .end
+                    .can('bike')
+                        .action('ride bike')
+                    .end
                 .end;
 
             root.run({

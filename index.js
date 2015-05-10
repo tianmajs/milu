@@ -33,25 +33,25 @@ module.exports = function(verb) {
         node.run = function(context, callback) {
             var deep = false,
 
-        next = function(callback) {
-            var node = child || sibling;
+            next = function(callback) {
+                var node = child || sibling;
 
-            deep = true;
+                deep = true;
 
-            if (node) {
-                node.run(context, callback);
-            } else {
-                callback.call(context, null);
-            }
-        },
+                if (node) {
+                    node.run(context, callback);
+                } else {
+                    callback.call(context, null);
+                }
+            },
 
-        done = function(err) {
-            if (!err && !deep && child && sibling) {
-                sibling.run(context, callback);
-            } else if (callback) {
-                callback.call(context, err);
-            }
-        };
+            done = function(err) {
+                if (!err && !deep && child && sibling) {
+                    sibling.run(context, callback);
+                } else if (callback) {
+                    callback.call(context, err);
+                }
+            };
 
             fn.call(context, next, done);
         };
