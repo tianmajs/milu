@@ -4,9 +4,11 @@ var co = require('mini-co');
 
 module.exports = function(verb) {
     verb = verb || {};
+    var newVerb = {}
 
     for (var name in verb) {
-        verb[name] = function(factory) {
+        // 使用新的对象代替入参, 因为在函数内部修改入参的内容会对外部代码造成副作用
+        newVerb[name] = function(factory) {
             return function() {
                 return this.use(factory.apply(null, arguments));
             };
@@ -14,7 +16,7 @@ module.exports = function(verb) {
     }
 
     function wrap(fn, parent) {
-        var node = Object.create(verb),
+        var node = Object.create(newVerb),
           sibling,
           child;
 
